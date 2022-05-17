@@ -1,4 +1,86 @@
 // FOREACH, MAP, REDUCE
+
+const usersArr = [
+    {
+        _id: "5cdce6ce338171bb473d2855",
+        index: 0,
+        isActive: false,
+        balance: 2397.64,
+        age: 39,
+        name: "Lucile Finley",
+        gender: "female",
+        company: "ZOXY",
+        email: "lucilefinley@zoxy.com",
+        phone: "+1 (842) 566-3328",
+        registered: "2015-07-12T09:39:03 -03:00"
+    },
+    {
+        _id: "5cdce6ce0aa8d071fa4f4cc5",
+        index: 1,
+        isActive: true,
+        balance: 2608.48,
+        age: 33,
+        name: "Woodward Grimes",
+        gender: "male",
+        company: "FORTEAN",
+        email: "woodwardgrimes@fortean.com",
+        phone: "+1 (960) 436-3138",
+        registered: "2014-09-08T03:24:39 -03:00"
+    },
+    {
+        _id: "5cdce6ce103de120d32d6fe4",
+        index: 2,
+        isActive: true,
+        balance: 1699.99,
+        age: 25,
+        name: "Robinson Coleman",
+        gender: "male",
+        company: "GENMOM",
+        email: "robinsoncoleman@genmom.com",
+        phone: "+1 (852) 543-3171",
+        registered: "2019-04-23T08:24:58 -03:00"
+    },
+    {
+        _id: "5cdce6cebada7a418d8ccb3d",
+        index: 3,
+        isActive: true,
+        balance: 2621.84,
+        age: 25,
+        name: "Austin Benton",
+        gender: "male",
+        company: "ZILIDIUM",
+        email: "austinbenton@zilidium.com",
+        phone: "+1 (977) 573-2627",
+        registered: "2016-08-02T10:08:24 -03:00"
+    },
+    {
+        _id: "5cdce6ced81fe99596d9cef5",
+        index: 4,
+        isActive: true,
+        balance: 1297.31,
+        age: 37,
+        name: "Casandra Stout",
+        gender: "female",
+        company: "ANACHO",
+        email: "casandrastout@anacho.com",
+        phone: "+1 (929) 465-3804",
+        registered: "2018-04-14T11:27:26 -03:00"
+    },
+    {
+        _id: "5cdce6ce6c3ae6c4d6f39e88",
+        index: 5,
+        isActive: false,
+        balance: 2165.49,
+        age: 20,
+        name: "Valencia Carrillo",
+        gender: "male",
+        company: "XEREX",
+        email: "valenciacarrillo@xerex.com",
+        phone: "+1 (977) 522-3378",
+        registered: "2014-02-14T11:45:27 -02:00"
+    }
+];
+
 console.log(usersArr);
 const totalBalance = usersArr.reduce((acum, item) => {
     return acum += item.balance
@@ -354,4 +436,59 @@ const stringOfIndex = (arr) => {
 
 console.log(stringOfIndex(arr));
 
-Methods of array
+// Отсортируйте массив массивов так, чтобы вначале располагались наименьшие массивы (размер массива определяется его длиной): 
+// [  [14, 45],  [1],  ['a', 'c', 'd']  ] → [ [1], [14, 45], ['a', 'c', 'd'] ]
+arr = [[14, 45], [1], ['a', 'c', 'd']];
+
+const sortArrLength = (arr) => arr.sort((prev, next) => prev.length - next.length);
+
+console.log(sortArrLength(arr));
+// Есть массив объектов:
+// [
+//     {cpu: 'intel', info: {cores:2, сache: 3}},
+//     {cpu: 'intel', info: {cores:4, сache: 4}},
+//     {cpu: 'amd', info: {cores:1, сache: 1}},
+//     {cpu: 'intel', info: {cores:3, сache: 2}},
+//     {cpu: 'amd', info: {cores:4, сache: 2}}
+// ]
+
+// Отсортировать их по возрастающему количеству ядер (cores).
+arr = [
+    { cpu: 'intel', info: { cores: 2, сache: 3 } },
+    { cpu: 'intel', info: { cores: 4, сache: 4 } },
+    { cpu: 'amd', info: { cores: 1, сache: 1 } },
+    { cpu: 'intel', info: { cores: 3, сache: 2 } },
+    { cpu: 'amd', info: { cores: 4, сache: 2 } }
+]
+
+const sortCoresUp = (arr) => arr.sort((prev, next) => prev.info.cores - next.info.cores);
+
+console.log(sortCoresUp(arr));
+
+// 3. Создать функцию, которая будет принимать массив продуктов и две цены. Функция должна вернуть все продукты, цена которых находится в указанном диапазоне, и сортировать от дешевых к дорогим:
+
+// let products = [
+//     {title: 'prod1', price: 5.2}, {title: 'prod2', price: 0.18},
+//     {title: 'prod3', price: 15}, {title: 'prod4', price: 25},
+//     {title: 'prod5', price: 18.9}, {title: 'prod6', price: 8},
+//     {title: 'prod7', price: 19}, {title: 'prod8', price: 63}
+// ];
+
+let products = [
+    { title: 'prod1', price: 5.2 }, { title: 'prod2', price: 0.18 },
+    { title: 'prod3', price: 15 }, { title: 'prod4', price: 25 },
+    { title: 'prod5', price: 18.9 }, { title: 'prod6', price: 8 },
+    { title: 'prod7', price: 19 }, { title: 'prod8', price: 63 }
+];
+
+const filterAndSortProducrs = (arr, minPrice, maxPrice) => {
+
+    const sortArr = arr.sort((prev, next) => prev.price - next.price);
+
+    return sortArr.filter(item => {
+        return minPrice <= item.price && item.price <= maxPrice;
+    });
+};
+
+console.log(filterAndSortProducrs(products, 15, 30));
+// filterCollection(products, 15, 30) → [{...price: 15}, {...price: 18.9}, {...price: 19}, {...price: 25}]
